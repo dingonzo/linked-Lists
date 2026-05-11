@@ -1,5 +1,4 @@
 # LinkedLists
-#
 # Program Purpose
 This program implements a CharLinkedList class, which is a linked 
     list implementation of a list of characters. The class includes 
