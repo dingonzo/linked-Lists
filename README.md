@@ -96,13 +96,12 @@ Testing:
 
 Testing has been done by every created class, constructor,
 and deconstructor. I would add cout text to ensure that each phase 
-worked.Most of the testing files have not been commented out incase for 
-any review. The above file descriptions list the tests in order, however
-my logic when approaching to test went about liek this:
-1.list tester function by descending order listed in the header file.
-2.when possible test the empty list 
-3.followed by testing a non empty list.
-4.print the result.
+worked. Most of the testing files have not been commented out incase for 
+any review. The above file descriptions list the tests in order. My logic when approaching the test went about like this:
+1. list tester function by descending order listed in the header file.
+2. When possible, test the empty list 
+3. followed by testing a non-empty list.
+4. Print the result.
 There were several times that I used try catch else statements for additional
 testing concering run_time and range_errors. I knowingly would throw these 
 exceptions to provide a more well rounded test for my functions. I found
@@ -117,43 +116,6 @@ fault.
 (I) - 
 All operations below are run on a separate, randomly generated
 CharLinkedList of size 10000.
-
-----------------------------------------------------------------------
-INSERTION OPERATION                                 Time (nanoseconds) 
-----------------------------------------------------------------------
-pushAtFront 100 times                               2011
-----------------------------------------------------------------------
-pushAtBack 100 times                                1083
-----------------------------------------------------------------------
-insertAt middle of list 100 times                   2680674 
-----------------------------------------------------------------------
-REMOVAL OPERATION                                   Time (nanoseconds) 
-----------------------------------------------------------------------
-popFromFront 100 times                              1007
-----------------------------------------------------------------------
-popFromBack 100 times                               950
-----------------------------------------------------------------------
-removeAt middle of list 100 times                   2870490
-----------------------------------------------------------------------
-ACCESS OPERATION                                    Time (nanoseconds) 
-----------------------------------------------------------------------
-call first() 100 times                              334
-----------------------------------------------------------------------
-call last() 100 times                               319
-----------------------------------------------------------------------
-call elementAt() for middle of list 100 times       2369299
-----------------------------------------------------------------------
-1. ACCESS OPERATION  2369952 = Average time (first)
-    Insertion Operation 2683768 = Average time (second)
-    Removal Operation 2872447 = Average time (third)
-2. 
----The access operations are usually the fastest due to action of 
-accessing the first() or last() element. These are usually instantaneous 
-in a doubly linked list because of Direct Pointers.
----Insertion Operations fall as the second fasters because they involve 
-because they involve Memory Allocation and Pointer Stitching.
----Lastly, the removal operations the slowest in this data set because 
-they combine Traversal with Deallocation.
 
 3. Pushat front and pushat back seemed to be much faster using this doubly
 linked list as opposed to the single linked list.
