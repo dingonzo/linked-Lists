@@ -1,0 +1,198 @@
+/*******************************************************************************
+* Hw 02: CharLinkedList
+* CS 15 Data Structures
+* README
+* Author: Edgar Gonzalez / egonza15
+*******************************************************************************/
+
+
+Program Purpose:
+---------------
+
+    This program implements a CharLinkedList class, which is a linked 
+    list implementation of a list of characters. The class includes 
+    constructors, a destructor, and various member functions for
+    manipulating the list, such as adding/removing characters,
+    and accessing elements. The implementation of these functions
+    will be provided in the corresponding CharLinkedList.cpp file.
+    Using a doubly linked list structure, each node will have
+    a pointer to both the next and previous nodes in the list.
+    Additionally, a unit test file is provided to test the functionality
+    of the CharLinkedList class. Two other files are incldued that test 
+    time measurements, (timer_main.cpp) and a Makefile to build the program.
+
+    
+
+Compile/run:
+-----------
+
+    Compile using the command "make unit_test"
+    Run using the command "./unit_test"
+    Then compile using the command "make timer"
+    Run using the command "./timer"
+
+
+Acknowledgments:
+---------------
+
+    I used github, c++, and w3 schools to assist me in understanding 
+    and solving this assignment. The rest of the time was dedicated to "
+
+Files:
+-----
+
+CharLinkedList.h: 
+This header file is the blueprint/ interface for the
+doubly linked list. It defines the "shape" of the class and the rules
+for interacting with it, without containing the actual logic for 
+how the functions operate. Within this file there is class structure 
+declaration, node definition, and function prototypes. Finally it features 
+encapsulation by separting the public interface from the private interface.
+
+CharLinkedList.cpp: 
+This file is the implementation of the blueprint file
+provided by CharLinkedList.h. This file is what makes the program start.
+It provides function definitions, management of memory and recursive logic,
+(recursive copying, insertion, and deletion by "stitching" together next 
+and prev pointers.)
+----It also manages the internal state of the list, ensuring that
+front, back, and numItems are updated correctly after every operation.
+----It implements the bounds checking and throws the specific exceptions 
+(like std::range_error).
+
+unit_tests.cpp: 
+This file contains a variety of tests that feature of the 
+functions defined and implemented by the above two files. I 
+implemented edge case testing that  featured "insertAt", "first", "last", 
+"insertinOrder", "reverse" "concatenate" and other testers. 
+It also tests pop functions.
+
+timer_main.cpp: 
+This file has already been premade and has been implemented 
+for further testing. 
+
+Makefile: File to build the program.
+
+
+Data Structures:
+---------------
+The data Structures formed in this program are as followed:
+Node structure - the core linkage
+*info - stores data, *next points to the next node, *prev points to the
+previous node. 
+This is followed by the Recursive helper funcitons----
+These functions move down the chain via next pointers and then "repair"
+or update the prev pointers during the backtracking phase of the recursion.
+I used the doubly linked list since it features the backtracking repair. 
+This is  due to the fact that this type of list brings a repair strategy
+that ensures pointer consistency and atomic operations (dangling pointers)
+By the time the recursion fully resolves, the entire list is guaranteed 
+to be in a valid state, rather than having half-finished links if a 
+loop were to be interrupted.
+
+(F)A Linked List is a linear data structure where elements (nodes) are stored 
+in non-contiguous memory locations. Each node consists of a data part and 
+a pointer (or reference) that links it to the next node in the sequence.
+---One major advantage to this approach is Dynamic Memory Allocation. 
+This means that it can grow indefinitely as long as memory is available, 
+avoiding the "overflow" issues common with fixed-size arrays.
+---One major disadvantage is Memory Overhead. Each node requires extra memory 
+to store the pointers in addition to the actual data, making it less 
+memory-efficient than a simple array for small data types
+
+Testing:
+-------
+
+Testing has been done by every created class, constructor,
+and deconstructor. I would add cout text to ensure that each phase 
+worked.Most of the testing files have not been commented out incase for 
+any review. The above file descriptions list the tests in order, however
+my logic when approaching to test went about liek this:
+1.list tester function by descending order listed in the header file.
+2.when possible test the empty list 
+3.followed by testing a non empty list.
+4.print the result.
+There were several times that I used try catch else statements for additional
+testing concering run_time and range_errors. I knowingly would throw these 
+exceptions to provide a more well rounded test for my functions. I found
+myself using assert statements more frequently as well. Another testing 
+function that I would use as testing "markers" as my code would be executed 
+were "if else" statements. These staements allowed me to benchmark my progress. 
+I also  frequently used valgrind./unit_testing to measure the amount of memory 
+I was losing. This was especially helpful since at one point i lost track
+of the nodes I was creating and I received a recurring implementation 
+fault.
+
+(I) - 
+All operations below are run on a separate, randomly generated
+CharLinkedList of size 10000.
+
+----------------------------------------------------------------------
+INSERTION OPERATION                                 Time (nanoseconds) 
+----------------------------------------------------------------------
+pushAtFront 100 times                               2011
+----------------------------------------------------------------------
+pushAtBack 100 times                                1083
+----------------------------------------------------------------------
+insertAt middle of list 100 times                   2680674 
+----------------------------------------------------------------------
+REMOVAL OPERATION                                   Time (nanoseconds) 
+----------------------------------------------------------------------
+popFromFront 100 times                              1007
+----------------------------------------------------------------------
+popFromBack 100 times                               950
+----------------------------------------------------------------------
+removeAt middle of list 100 times                   2870490
+----------------------------------------------------------------------
+ACCESS OPERATION                                    Time (nanoseconds) 
+----------------------------------------------------------------------
+call first() 100 times                              334
+----------------------------------------------------------------------
+call last() 100 times                               319
+----------------------------------------------------------------------
+call elementAt() for middle of list 100 times       2369299
+----------------------------------------------------------------------
+1. ACCESS OPERATION  2369952 = Average time (first)
+    Insertion Operation 2683768 = Average time (second)
+    Removal Operation 2872447 = Average time (third)
+2. 
+---The access operations are usually the fastest due to action of 
+accessing the first() or last() element. These are usually instantaneous 
+in a doubly linked list because of Direct Pointers.
+---Insertion Operations fall as the second fasters because they involve 
+because they involve Memory Allocation and Pointer Stitching.
+---Lastly, the removal operations the slowest in this data set because 
+they combine Traversal with Deallocation.
+
+3. Pushat front and pushat back seemed to be much faster using this doubly
+linked list as opposed to the single linked list.
+--- call elemntAt in a single array list worked significantly faster than 
+in the double linked list.
+
+Questions:
+--------
+
+• Q1: Which functions in the interface were easier to implement for 
+linked lists compared to array
+lists? 
+insertinOrder 
+Why?
+in my opinion, i had much less trouble implementing 
+inserinorder, because it eliminates the most tedious part of array 
+management, the "Shift" operation. 
+Since in an array list, you have to manually move every single element 
+after that point to the right to make a hole.
+
+• Q2: Which functions in the interface were harder to implement for 
+linked lists compared to array
+lists? 
+RemoveAt, elementAt
+Why?
+
+• Q3: If a client had an existing program that uses CharArrayLists, 
+what changes would they have to make to their code to switch to 
+CharLinkedLists?
+An Array accesses a specific index using a simple mathematical calculation. 
+While using nodes, you cannot jump at all, you have to traverse 
+though the entire list of pointers before arriving at the element 
+you desire. Not to mention the complexity in managing a web of pointers.
